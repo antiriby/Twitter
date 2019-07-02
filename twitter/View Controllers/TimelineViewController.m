@@ -7,11 +7,13 @@
 //
 
 #import "TimelineViewController.h"
+#import "UIImageView+AFNetworking.h"
 #import "APIManager.h"
 #import "TweetCell.h"
 
 @interface TimelineViewController () <UITableViewDelegate, UITableViewDataSource>
-@property (weak, nonatomic) IBOutlet UITableView *timelineTableView;
+@property (nonatomic, weak) IBOutlet UITableView *timelineTableView;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 
 @end
@@ -21,14 +23,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // Do any additional setup after loading the view.
+    self.timelineTableView.dataSource = self;
+    self.timelineTableView.delegate = self;
+    
     // Get timeline
     [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
         if (tweets) {
             NSLog(@"😎😎😎 Successfully loaded home timeline");
-            for (NSDictionary *dictionary in tweets) {
-                NSString *text = dictionary[@"text"];
-                NSLog(@"%@", text);
-            }
+            self.tweetsArray = tweets;
+            
+            [self.timelineTableView reloadData];
+            
         } else {
             NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
         }
@@ -38,53 +44,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-//Requests Tweets from the API
-//TODO: Update this method for Twitter instead of movies
-- (void)fetchTweets {
-//    NSURL *nowPlayingURL = [NSURL URLWithString:@"https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed"];
-//    NSURLRequest *request = [NSURLRequest requestWithURL:nowPlayingURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10.0];
-//    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
-//    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-//        if (error != nil) {
-//            NSLog(@"%@", [error localizedDescription]);
-//            //Alert Controller
-//            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Network Error"
-//                                                                           message:@"Unable to connect to internet."
-//                                                                    preferredStyle:(UIAlertControllerStyleAlert)];
-//            // OK action
-//            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
-//                                                             handler:^(UIAlertAction * _Nonnull action) {
-//                                                                 // handle response here.
-//                                                                 exit(0);
-//                                                             }];
-//            [alert addAction:okAction];
-//
-//            [self presentViewController:alert animated:YES completion:^{
-//                // optional code for what happens after the alert controller has finished presenting
-//            }];
-//        }
-//        else {
-//
-//            NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-//
-//            self.movies = dataDictionary[@"results"];
-//            self.filteredMovies = self.movies;
-//
-//            [self.activityIndicator stopAnimating];
-//            [self.tableView reloadData];
-//            // TODO: Get the array of movies
-//            // TODO: Store the movies in a property to use elsewhere
-//            // TODO: Reload your table view data
-//        }
-//
-//
-//
-//        [self.refreshControl endRefreshing];
-//
-//    }];
-//    [task resume];
 }
 
 
@@ -100,18 +59,30 @@
 */
 
 
-
-
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    //TODO: Make this the number of tweets
-    return 20;
+    //TODO: Set up the Tweet Cell
+    TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell" forIndexPath:indexPath];
+    
+    Tweet *tweet = self.tweetsArray[indexPath.row];
+    User *user = tweet.user;
+    
+    cell.userName.text = user.name;
+    cell.userScreenName.text = user.screenName;
+    cell.date.text = tweet.createdAtString;
+    cell.tweetText.text = tweet.text;
+
+    NSURL *profilePictureURL = [NSURL URLWithString:user.profileImageURL];
+    [cell.imageView setImageWithURL:profilePictureURL];
+            
+    return cell;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    //TODO: Set up the Tweet Cell
-    TweetCell cell = [[Tweet alloc] init];
-    return cell;
+    //TODO: Make this the number of tweets
+    return self.tweetsArray.count;
 }
+
+
 
 
 
