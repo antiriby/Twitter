@@ -8,8 +8,11 @@
 
 #import "TimelineViewController.h"
 #import "APIManager.h"
+#import "TweetCell.h"
 
-@interface TimelineViewController ()
+@interface TimelineViewController () <UITableViewDelegate, UITableViewDataSource>
+@property (weak, nonatomic) IBOutlet UITableView *timelineTableView;
+
 
 @end
 
@@ -37,6 +40,55 @@
     // Dispose of any resources that can be recreated.
 }
 
+//Requests Tweets from the API
+//TODO: Update this method for Twitter instead of movies
+- (void)fetchTweets {
+//    NSURL *nowPlayingURL = [NSURL URLWithString:@"https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed"];
+//    NSURLRequest *request = [NSURLRequest requestWithURL:nowPlayingURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10.0];
+//    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
+//    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//        if (error != nil) {
+//            NSLog(@"%@", [error localizedDescription]);
+//            //Alert Controller
+//            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Network Error"
+//                                                                           message:@"Unable to connect to internet."
+//                                                                    preferredStyle:(UIAlertControllerStyleAlert)];
+//            // OK action
+//            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+//                                                             handler:^(UIAlertAction * _Nonnull action) {
+//                                                                 // handle response here.
+//                                                                 exit(0);
+//                                                             }];
+//            [alert addAction:okAction];
+//
+//            [self presentViewController:alert animated:YES completion:^{
+//                // optional code for what happens after the alert controller has finished presenting
+//            }];
+//        }
+//        else {
+//
+//            NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+//
+//            self.movies = dataDictionary[@"results"];
+//            self.filteredMovies = self.movies;
+//
+//            [self.activityIndicator stopAnimating];
+//            [self.tableView reloadData];
+//            // TODO: Get the array of movies
+//            // TODO: Store the movies in a property to use elsewhere
+//            // TODO: Reload your table view data
+//        }
+//
+//
+//
+//        [self.refreshControl endRefreshing];
+//
+//    }];
+//    [task resume];
+}
+
+
+
 /*
 #pragma mark - Navigation
 
@@ -46,6 +98,21 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+
+
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    //TODO: Make this the number of tweets
+    return 20;
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    //TODO: Set up the Tweet Cell
+    TweetCell cell = [[Tweet alloc] init];
+    return cell;
+}
+
 
 
 @end

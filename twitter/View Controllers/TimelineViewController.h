@@ -10,4 +10,8 @@
 
 @interface TimelineViewController : UIViewController
 
+@property (nonatomic, strong) NSArray *tweets;
+
+-(void) fetchTweets;
+
 @end

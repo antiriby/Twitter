@@ -13,6 +13,9 @@
 
 + (instancetype)shared;
 
+//API function request for timeline
 - (void)getHomeTimelineWithCompletion:(void(^)(NSArray *tweets, NSError *error))completion;
+
+//Add more method calls for other functions like favoriting, retweeting, sharing, etc.
 
 @end
