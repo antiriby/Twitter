@@ -6,6 +6,7 @@
 //  Copyright © 2018 Emerson Malca. All rights reserved.
 //
 
+#import "Tweet.h"
 #import "BDBOAuth1SessionManager.h"
 #import "BDBOAuth1SessionManager+SFAuthenticationSession.h"
 
@@ -15,6 +16,8 @@
 
 //API function request for timeline
 - (void)getHomeTimelineWithCompletion:(void(^)(NSArray *tweets, NSError *error))completion;
+
+- (void)postStatusWithText:(NSString *)text completion:(void (^)(Tweet *, NSError *))completion;
 
 //Add more method calls for other functions like favoriting, retweeting, sharing, etc.
 

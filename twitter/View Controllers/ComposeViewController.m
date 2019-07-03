@@ -7,6 +7,8 @@
 //
 
 #import "ComposeViewController.h"
+#import "APIManager.h"
+#import "Tweet.h"
 
 @interface ComposeViewController ()
 
@@ -16,7 +18,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 }
 
 /*
@@ -24,12 +25,28 @@
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+     Get the new view controller using [segue destinationViewController].ß
+     Pass the selected object to the new view controller.
 }
 */
 
-- (IBAction)composeTweet:(id)sender {
+- (IBAction)postComposedTweet:(id)sender {
+    [[APIManager shared] postStatusWithText:self.textView.text completion:^(Tweet *tweet, NSError *error) {
+        // code goes here
+        // handle if an error happens
+        // handle successful tweet composed
+        
+        if(error){
+            NSLog(@"Error composing Tweet: %@", error.localizedDescription);
+        }
+        else{
+            [self.delegate didTweet:tweet];
+            NSLog(@"Compose Tweet Success!");
+        }
+        
+   
+    }];
+    [self dismissViewControllerAnimated:true completion:nil];
 }
 
 - (IBAction)closeComposedTweet:(id)sender {

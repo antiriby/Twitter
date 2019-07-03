@@ -113,16 +113,36 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gob-dl-vIv">
                                                     <rect key="frame" x="279" y="9" width="74" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Do-r9-Ufr">
-                                                    <rect key="frame" x="80" y="32" width="255" height="100"/>
+                                                    <rect key="frame" x="78" y="40" width="179" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7xd-uL-cZf">
+                                                    <rect key="frame" x="222" y="96" width="41" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="0" image="favor-icon">
+                                                        <color key="titleColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                                    </state>
+                                                    <state key="selected" image="favor-icon-red">
+                                                        <color key="titleColor" red="1" green="0.19844910860000001" blue="0.24546021609999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    </state>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IDl-T7-1CN">
+                                                    <rect key="frame" x="109" y="101" width="50" height="25"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="0" image="retweet-icon">
+                                                        <color key="titleColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                                    </state>
+                                                    <state key="selected" image="retweet-icon-green">
+                                                        <color key="titleColor" red="0.43089145420000002" green="0.74611395599999997" blue="0.3528585434" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    </state>
+                                                </button>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
@@ -146,9 +166,9 @@
                         <viewLayoutGuide key="safeArea" id="XKK-dj-5vZ"/>
                     </view>
                     <navigationItem key="navigationItem" title="Timeline" id="bNw-87-eFJ">
-                        <barButtonItem key="rightBarButtonItem" image="edit-icon" id="XO5-7b-uvY">
+                        <barButtonItem key="rightBarButtonItem" title="Compose" image="edit-icon" id="SJz-hM-dGh">
                             <connections>
-                                <segue destination="Lle-ei-sx2" kind="presentation" id="5p9-2l-lqb"/>
+                                <segue destination="Lle-ei-sx2" kind="presentation" id="snd-HW-e1U"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -183,19 +203,19 @@
                     <navigationItem key="navigationItem" id="bJf-ac-POk">
                         <barButtonItem key="leftBarButtonItem" title="X" id="G4y-gS-gio">
                             <connections>
-                                <action selector="closeComposedTweet:" destination="5r9-sH-zkL" id="ho6-Vs-ChS"/>
+                                <action selector="closeComposedTweet:" destination="5r9-sH-zkL" id="6Gx-zJ-b09"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Tweet" id="JyG-zw-eVy">
                             <connections>
-                                <action selector="composeTweet:" destination="5r9-sH-zkL" id="dFB-Oy-dRX"/>
+                                <action selector="postComposedTweet:" destination="5r9-sH-zkL" id="EfF-Sk-p9L"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="barButton" destination="JyG-zw-eVy" id="w1C-nL-bVR"/>
                         <outlet property="closeButton" destination="G4y-gS-gio" id="n04-Aa-tUo"/>
                         <outlet property="textView" destination="X3m-fO-uaq" id="Q2A-jk-8Eb"/>
+                        <outlet property="tweetButton" destination="JyG-zw-eVy" id="Cbg-b5-EZG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3jQ-eu-Jt6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -224,5 +244,9 @@
     <resources>
         <image name="TwitterLogoBlue" width="200" height="200"/>
         <image name="edit-icon" width="30" height="27"/>
+        <image name="favor-icon" width="30" height="30"/>
+        <image name="favor-icon-red" width="30" height="30"/>
+        <image name="retweet-icon" width="30" height="30"/>
+        <image name="retweet-icon-green" width="30" height="30"/>
     </resources>
 </document>
