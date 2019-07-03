@@ -27,13 +27,23 @@
     self.timelineTableView.dataSource = self;
     self.timelineTableView.delegate = self;
     
-    // Get timeline
+    //Refresh Control Initialization
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(fetchTweets) forControlEvents:UIControlEventValueChanged];
+    [self.timelineTableView insertSubview:self.refreshControl atIndex: 0];
+    [self.timelineTableView addSubview:self.refreshControl];
+    
+    [self fetchTweets];
+}
+
+-(void)fetchTweets {
     [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
         if (tweets) {
             NSLog(@"😎😎😎 Successfully loaded home timeline");
             self.tweetsArray = tweets;
             
             [self.timelineTableView reloadData];
+            [self.refreshControl endRefreshing];
             
         } else {
             NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
@@ -71,8 +81,8 @@
     cell.date.text = tweet.createdAtString;
     cell.tweetText.text = tweet.text;
 
-    NSURL *profilePictureURL = [NSURL URLWithString:user.profileImageURL];
-    [cell.imageView setImageWithURL:profilePictureURL];
+    NSURL *profilePictureURL = [NSURL URLWithString:tweet.user.profileImageURL];
+    [cell.userImageView setImageWithURL:profilePictureURL];
             
     return cell;
 }
