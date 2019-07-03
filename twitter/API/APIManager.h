@@ -19,6 +19,8 @@
 
 - (void)postStatusWithText:(NSString *)text completion:(void (^)(Tweet *, NSError *))completion;
 
+- (void)favorite:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion;
+
 //Add more method calls for other functions like favoriting, retweeting, sharing, etc.
 
 @end

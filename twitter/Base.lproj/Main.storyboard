@@ -123,8 +123,8 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7xd-uL-cZf">
-                                                    <rect key="frame" x="222" y="96" width="41" height="30"/>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="FavoriteButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7xd-uL-cZf">
+                                                    <rect key="frame" x="222" y="96" width="110" height="33"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="0" image="favor-icon">
                                                         <color key="titleColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
@@ -132,9 +132,12 @@
                                                     <state key="selected" image="favor-icon-red">
                                                         <color key="titleColor" red="1" green="0.19844910860000001" blue="0.24546021609999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="didTapFavorite:" destination="H1O-1g-PE2" eventType="touchUpInside" id="dXG-wf-Z8G"/>
+                                                    </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IDl-T7-1CN">
-                                                    <rect key="frame" x="109" y="101" width="50" height="25"/>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="RetweetButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IDl-T7-1CN">
+                                                    <rect key="frame" x="109" y="101" width="85" height="25"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="0" image="retweet-icon">
                                                         <color key="titleColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
@@ -147,6 +150,8 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="date" destination="Gob-dl-vIv" id="yt2-h7-7UG"/>
+                                            <outlet property="favoriteButton" destination="7xd-uL-cZf" id="l45-FQ-1ZX"/>
+                                            <outlet property="retweetButton" destination="IDl-T7-1CN" id="sBV-vw-V6n"/>
                                             <outlet property="tweetText" destination="5Do-r9-Ufr" id="MeU-yq-qMq"/>
                                             <outlet property="userImageView" destination="RgZ-Pm-7jJ" id="wE4-zJ-1fr"/>
                                             <outlet property="userName" destination="nhj-4E-KsU" id="FT7-84-1z6"/>

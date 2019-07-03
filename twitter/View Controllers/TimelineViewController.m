@@ -100,10 +100,8 @@
     Tweet *tweet = self.tweetsArray[indexPath.row];
     User *user = tweet.user;
     
-    cell.userName.text = user.name;
-    cell.userScreenName.text = user.screenName;
-    cell.date.text = tweet.createdAtString;
-    cell.tweetText.text = tweet.text;
+    cell.tweet = tweet;
+
 
     NSURL *profilePictureURL = [NSURL URLWithString:tweet.user.profileImageURL];
     [cell.userImageView setImageWithURL:profilePictureURL];
