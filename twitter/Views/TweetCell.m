@@ -30,7 +30,6 @@
     if (self.tweet.favorited) {
         self.tweet.favorited = NO;
         self.tweet.favoriteCount -= 1;
-        [self.favoriteButton setImage:[UIImage imageNamed:@"favor-icon"] forState:UIControlStateNormal];
         // TODO: Send a POST request to the POST favorites/create endpoint
         [[APIManager shared] unFavorite:self.tweet completion:^(Tweet *tweet, NSError *error) {
             if(error){
@@ -40,6 +39,8 @@
                 NSLog(@"Successfully unfavorited the following Tweet: %@", tweet.text);
             }
         }];
+        [self.favoriteButton setImage:[UIImage imageNamed:@"favor-icon"] forState:UIControlStateNormal];
+
         
     } else {
         self.tweet.favorited = YES;
@@ -97,7 +98,10 @@
     //this is the fix
     
     self.favoriteButton.selected = tweet.favorited;
+    self.retweetButton.selected = tweet.retweeted;
     [self.favoriteButton setTitle:[NSString stringWithFormat:@"%i", self.tweet.favoriteCount]forState:UIControlStateNormal];
+    [self.retweetButton setTitle:[NSString stringWithFormat:@"%i", self.tweet.retweetCount]forState:UIControlStateNormal];
+
     
     if (self.tweet.favorited) {
         [self.favoriteButton setImage:[UIImage imageNamed:@"favor-icon-red"] forState:UIControlStateNormal];
