@@ -137,7 +137,7 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="RetweetButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IDl-T7-1CN">
-                                                    <rect key="frame" x="109" y="101" width="85" height="25"/>
+                                                    <rect key="frame" x="109" y="101" width="105" height="39"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="0" image="retweet-icon">
                                                         <color key="titleColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
@@ -145,6 +145,9 @@
                                                     <state key="selected" image="retweet-icon-green">
                                                         <color key="titleColor" red="0.43089145420000002" green="0.74611395599999997" blue="0.3528585434" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="didTapRetweet:" destination="H1O-1g-PE2" eventType="touchUpInside" id="SNH-SH-8aX"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
