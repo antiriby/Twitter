@@ -52,4 +52,7 @@
 - (IBAction)closeComposedTweet:(id)sender {
     [self dismissViewControllerAnimated:true completion:nil];
 }
+
+- (IBAction)didTapLogout:(id)sender {
+}
 @end

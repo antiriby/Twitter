@@ -99,6 +99,9 @@
     self.retweetButton.selected = self.tweet.retweeted;
 }
 
+- (IBAction)didTapLogout:(id)sender {
+}
+
 - (void)setTweet:(Tweet *)tweet{
     _tweet = tweet;
     self.userName.text = tweet.user.name;

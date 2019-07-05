@@ -11,6 +11,8 @@
 #import "UIImageView+AFNetworking.h"
 #import "APIManager.h"
 #import "TweetCell.h"
+#import "AppDelegate.h"
+#import "LoginViewController.h"
 
 @interface TimelineViewController () <UITableViewDelegate, UITableViewDataSource, ComposeViewControllerDelegate>
 //Pointing the delegate and the datasource pointers to the ViewController from the tableView tells the tableView where it will get the data from that you want to display
@@ -122,6 +124,17 @@
     [self.tweetsArray addObject:tweet];
     [self fetchTweets];
     [self.timelineTableView reloadData];
+}
+
+- (IBAction)didTapLogout:(id)sender {
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    appDelegate.window.rootViewController = loginViewController;
+    
+    //Clears out the token
+    [[APIManager shared] logout];
 }
 
 

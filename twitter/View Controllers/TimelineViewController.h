@@ -10,8 +10,7 @@
 
 @interface TimelineViewController : UIViewController
 @property (nonatomic, strong) NSMutableArray *tweetsArray;
-
-
 -(void) fetchTweets;
+- (IBAction)didTapLogout:(id)sender;
 
 @end
