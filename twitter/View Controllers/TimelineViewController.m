@@ -100,7 +100,6 @@
     Tweet *tweet = self.tweetsArray[indexPath.row];    
     cell.tweet = tweet;
 
-
     NSURL *profilePictureURL = [NSURL URLWithString:tweet.user.profileImageURL];
     [cell.userImageView setImageWithURL:profilePictureURL];
             
@@ -113,7 +112,6 @@
     return self.tweetsArray.count;
 }
 
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     UINavigationController *navigationController = [segue destinationViewController];
     ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
@@ -121,7 +119,6 @@
 }
 
 - (void)didTweet:(nonnull Tweet *)tweet {
-    
     [self.tweetsArray addObject:tweet];
     [self fetchTweets];
     [self.timelineTableView reloadData];

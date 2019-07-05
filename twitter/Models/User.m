@@ -14,7 +14,7 @@
     self = [super init];
     if(self){
         self.name = dictionary[@"name"];
-        self.screenName = dictionary[@"screen_name"];
+        self.screenName = [NSString stringWithFormat:@"@%@tweet.user.screenName",dictionary[@"screen_name"]];
         self.profileImageURL = dictionary[@"profile_image_url_https"];
         //...
         //initialize any other properties if necessary
