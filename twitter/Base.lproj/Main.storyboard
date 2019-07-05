@@ -137,6 +137,7 @@
                                                     </state>
                                                     <state key="selected" image="retweet-icon-green">
                                                         <color key="titleColor" red="0.43089145420000002" green="0.74611395599999997" blue="0.3528585434" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <color key="titleShadowColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                     </state>
                                                     <connections>
                                                         <action selector="didTapRetweet:" destination="H1O-1g-PE2" eventType="touchUpInside" id="SNH-SH-8aX"/>
