@@ -136,6 +136,9 @@
     //Clears out the token
     [[APIManager shared] logout];
 }
-
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return 200;
+//}
 
 @end
