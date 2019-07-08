@@ -21,8 +21,6 @@
 // View controller has a tableView as a subview
 @property (nonatomic, weak) IBOutlet UITableView *timelineTableView;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
-
-
 @end
 
 @implementation TimelineViewController
@@ -41,21 +39,20 @@
     [self.timelineTableView insertSubview:self.refreshControl atIndex: 0];
     [self.timelineTableView addSubview:self.refreshControl];
     
+    //Make API request and display tweets
     [self fetchTweets];
 }
 
 -(void)fetchTweets {
-    
     //Step 4
     //Make an API request
         //Calling [APIManager shared] creates an instance of the APIManager
         //Calling the completion block prevents us from blocking our app.
         //This allows us to continue setting up the refresh control, displaying the timeline, etc.
         //even if we are not successful in receiving data from the API.
-    
-    //Step 5
-    //API manager calls the completion handler passing back data
     [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
+        //Step 5
+        //API manager calls the completion handler passing back data
         if (tweets) {
             NSLog(@"😎😎😎 Successfully loaded home timeline");
             //Step 6
@@ -65,7 +62,6 @@
             //Reload the table view
             [self.timelineTableView reloadData];
             [self.refreshControl endRefreshing];
-            
         } else {
             NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
         }
@@ -96,12 +92,11 @@
     //Step 10:
     //cellForRow returns an instance of the custom cell with that reuse identifier
     //with it’s elements populated with data at the index asked for
-
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell" forIndexPath:indexPath];
-    
     Tweet *tweet = self.tweetsArray[indexPath.row];    
     cell.tweet = tweet;
-
+    
+    //Set profile image view
     NSURL *profilePictureURL = [NSURL URLWithString:tweet.user.profileImageURL];
     [cell.userImageView setImageWithURL:profilePictureURL];
             
@@ -128,17 +123,10 @@
 
 - (IBAction)didTapLogout:(id)sender {
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
     appDelegate.window.rootViewController = loginViewController;
-    
-    //Clears out the token
-    [[APIManager shared] logout];
+    [[APIManager shared] logout];     //Clears out the token
 }
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    return 200;
-//}
 
 @end

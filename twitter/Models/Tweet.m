@@ -14,13 +14,11 @@
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
     self = [super init];
     if (self) {
-        
         // Is this a re-tweet?
         NSDictionary *originalTweet = dictionary[@"retweeted_status"];
         if(originalTweet != nil){
             NSDictionary *userDictionary = dictionary[@"user"];
             self.retweetedByUser = [[User alloc] initWithDictionary:userDictionary];
-            
             // Change tweet to original tweet
             dictionary = originalTweet;
         }
@@ -30,7 +28,6 @@
         self.favorited = [dictionary[@"favorited"] boolValue];
         self.retweetCount = [dictionary[@"retweet_count"] intValue];
         self.retweeted = [dictionary[@"retweeted"] boolValue];
-        
         
         // Initialize user
         NSDictionary *user = dictionary[@"user"];
@@ -54,7 +51,6 @@
 
 //returns Tweets when initialized with an array of Tweet Dictionaries
 //This method comes in handy every time you get back a response with an array of Tweet dictionaries
-
 + (NSMutableArray *)tweetsWithArray:(NSArray *)dictionaries{
     NSMutableArray *tweets = [NSMutableArray array];
     for (NSDictionary *dictionary in dictionaries) {

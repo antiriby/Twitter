@@ -22,12 +22,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *tweetButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *closeButton;
-@property (nonatomic, weak) id<ComposeViewControllerDelegate> delegate;
-
+@property (weak, nonatomic) id<ComposeViewControllerDelegate> delegate;
 - (IBAction)postComposedTweet:(id)sender;
 - (IBAction)closeComposedTweet:(id)sender;
-
-
 
 @end
 

@@ -32,19 +32,12 @@
 
 - (IBAction)postComposedTweet:(id)sender {
     [[APIManager shared] postStatusWithText:self.textView.text completion:^(Tweet *tweet, NSError *error) {
-        // code goes here
-        // handle if an error happens
-        // handle successful tweet composed
-        
         if(error){
             NSLog(@"Error composing Tweet: %@", error.localizedDescription);
-        }
-        else{
+        }else{
             [self.delegate didTweet:tweet];
             NSLog(@"Compose Tweet Success!");
         }
-        
-   
     }];
     [self dismissViewControllerAnimated:true completion:nil];
 }
@@ -53,6 +46,4 @@
     [self dismissViewControllerAnimated:true completion:nil];
 }
 
-- (IBAction)didTapLogout:(id)sender {
-}
 @end

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface TimelineViewController : UIViewController
-@property (nonatomic, strong) NSMutableArray *tweetsArray;
+@property (strong, nonatomic) NSMutableArray *tweetsArray;
 -(void) fetchTweets;
 - (IBAction)didTapLogout:(id)sender;
 
