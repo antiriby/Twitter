@@ -96,6 +96,9 @@
     Tweet *tweet = self.tweetsArray[indexPath.row];    
     cell.tweet = tweet;
     
+    cell.userImageView.layer.cornerRadius =  cell.userImageView.frame.size.width / 2;
+    cell.userImageView.clipsToBounds = true;
+    
     //Set profile image view
     NSURL *profilePictureURL = [NSURL URLWithString:tweet.user.profileImageURL];
     [cell.userImageView setImageWithURL:profilePictureURL];
