@@ -73,19 +73,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-
+#pragma mark - UITableViewDataSource
 //Step 8
 //Table view asks its dataSource for numberOfRows & cellForRowAt
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
@@ -96,12 +84,11 @@
     Tweet *tweet = self.tweetsArray[indexPath.row];    
     cell.tweet = tweet;
     
-    cell.userImageView.layer.cornerRadius =  cell.userImageView.frame.size.width / 2;
-    cell.userImageView.clipsToBounds = true;
-    
     //Set profile image view
     NSURL *profilePictureURL = [NSURL URLWithString:tweet.user.profileImageURL];
     [cell.userImageView setImageWithURL:profilePictureURL];
+    cell.userImageView.layer.cornerRadius =  cell.userImageView.frame.size.width / 2;
+    cell.userImageView.clipsToBounds = true;
             
     return cell;
 }
@@ -112,24 +99,27 @@
     return self.tweetsArray.count;
 }
 
+#prama mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     UINavigationController *navigationController = [segue destinationViewController];
     ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
     composeController.delegate = self;
 }
 
+#pragma mark - ComposeViewControllerDelegate
 - (void)didTweet:(nonnull Tweet *)tweet {
     [self.tweetsArray addObject:tweet];
     [self fetchTweets];
     [self.timelineTableView reloadData];
 }
 
+#pragma mark - IBAction
 - (IBAction)didTapLogout:(id)sender {
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
     appDelegate.window.rootViewController = loginViewController;
-    [[APIManager shared] logout];     //Clears out the token
+    [[APIManager shared] logout];
 }
 
 @end

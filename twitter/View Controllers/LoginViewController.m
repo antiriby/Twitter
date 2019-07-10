@@ -24,17 +24,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-- (IBAction)didTapLogin:(id)sender {
-    [[APIManager shared] loginWithCompletion:^(BOOL success, NSError *error) {
-        if (success) {
-            [self performSegueWithIdentifier:@"loginSegue" sender:nil];
-        } else {
-            NSLog(@"%@", error.localizedDescription);
-        }
-    }];
-}
-
 /*
 #pragma mark - Navigation
 
@@ -44,5 +33,16 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark - IBAction
+- (IBAction)didTapLogin:(id)sender {
+    [[APIManager shared] loginWithCompletion:^(BOOL success, NSError *error) {
+        if (success) {
+            [self performSegueWithIdentifier:@"loginSegue" sender:nil];
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+}
 
 @end
