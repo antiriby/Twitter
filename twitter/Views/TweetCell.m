@@ -21,6 +21,20 @@
     [super setSelected:selected animated:animated];
 }
 
+- (void)setTweet:(Tweet *)tweet{
+    _tweet = tweet;
+    self.userName.text = tweet.user.name;
+    self.userScreenName.text = tweet.user.screenName;
+    self.date.text = tweet.createdAtString;
+    self.tweetText.text = tweet.text;
+    
+    self.favoriteButton.selected = tweet.favorited;
+    self.retweetButton.selected = tweet.retweeted;
+    [self.favoriteButton setTitle:[NSString stringWithFormat:@"%i", self.tweet.favoriteCount]forState:UIControlStateNormal];
+    [self.retweetButton setTitle:[NSString stringWithFormat:@"%i", self.tweet.retweetCount]forState:UIControlStateNormal];
+}
+
+#pragma mark - IBAction
 - (IBAction)didTapFavorite:(id)sender {
     // TODO: Update the local tweet model
     if (self.tweet.favorited) {
@@ -87,22 +101,5 @@
     }
     self.retweetButton.selected = self.tweet.retweeted;
 }
-
-- (IBAction)didTapLogout:(id)sender {
-}
-
-- (void)setTweet:(Tweet *)tweet{
-    _tweet = tweet;
-    self.userName.text = tweet.user.name;
-    self.userScreenName.text = tweet.user.screenName;
-    self.date.text = tweet.createdAtString;
-    self.tweetText.text = tweet.text;
-    
-    self.favoriteButton.selected = tweet.favorited;
-    self.retweetButton.selected = tweet.retweeted;
-    [self.favoriteButton setTitle:[NSString stringWithFormat:@"%i", self.tweet.favoriteCount]forState:UIControlStateNormal];
-    [self.retweetButton setTitle:[NSString stringWithFormat:@"%i", self.tweet.retweetCount]forState:UIControlStateNormal];
-}
-
 
 @end

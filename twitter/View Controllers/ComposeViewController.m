@@ -30,6 +30,7 @@
 }
 */
 
+#pragma mark - IBAction
 - (IBAction)postComposedTweet:(id)sender {
     [[APIManager shared] postStatusWithText:self.textView.text completion:^(Tweet *tweet, NSError *error) {
         if(error){
